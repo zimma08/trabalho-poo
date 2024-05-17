@@ -1,0 +1,42 @@
+public class trabalho class Progressao:
+        def __init__(self, primeiro=0, razao=1):
+        self.primeiro = primeiro
+        self.razao = razao
+        self.proximo_numero = primeiro
+
+        def proximo(self):
+        self.proximo_numero += self.razao
+        return self.proximo_numero
+
+        def reiniciar(self):
+        self.proximo_numero = self.primeiro
+
+
+class ProgressaoAritmetica(Progressao):
+        def __init__(self, primeiro=0, razao=1):
+        super().__init__(primeiro, razao)
+
+
+class ProgressaoGeometrica(Progressao):
+        def __init__(self, primeiro=1, razao=2):
+        super().__init__(primeiro, razao)
+
+        def proximo(self):
+        self.proximo_numero *= self.razao
+        return self.proximo_numero
+
+
+class ProgressaoFibonacci(Progressao):
+        def __init__(self, primeiro=0, segundo=1):
+        self.primeiro = primeiro
+        self.segundo = segundo
+        self.proximo_numero = primeiro
+
+        def proximo(self):
+        proximo_numero = self.primeiro + self.segundo
+        self.primeiro = self.segundo
+        self.segundo = proximo_numero
+        self.proximo_numero = proximo_numero
+        return proximo_numero
+        {
+}
