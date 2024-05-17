@@ -1,0 +1,56 @@
+public class main class RetanguloDecorator:
+        def __init__(self, retangulo):
+        self.retangulo = retangulo
+
+        def desenhar(self):
+        return self.retangulo.desenhar()
+
+
+class RetanguloSimples:
+        def __init__(self, largura, altura, texto):
+        self.largura = largura
+        self.altura = altura
+        self.texto = texto
+
+        def desenhar(self):
+        linha_superior = "+" + "-" * (self.largura - 2) + "+"
+        linhas_meio = "|" + self.texto.center(self.largura - 2) + "|"
+        linha_inferior = "+" + "-" * (self.largura - 2) + "+"
+        retangulo = [linha_superior]
+        retangulo.extend([linhas_meio] * (self.altura - 2))
+        retangulo.append(linha_inferior)
+        return "\n".join(retangulo)
+
+
+class RetanguloComBordasArredondadas:
+        def __init__(self, largura, altura, texto):
+        self.largura = largura
+        self.altura = altura
+        self.texto = texto
+
+        def desenhar(self):
+        linha_superior = "╭" + "─" * (self.largura - 2) + "╮"
+        linhas_meio = "│" + self.texto.center(self.largura - 2) + "│"
+        linha_inferior = "╰" + "─" * (self.largura - 2) + "╯"
+        retangulo = [linha_superior]
+        retangulo.extend([linhas_meio] * (self.altura - 2))
+        retangulo.append(linha_inferior)
+        return "\n".join(retangulo)
+
+
+class RetanguloComLinhasDuplas:
+        def __init__(self, largura, altura, texto):
+        self.largura = largura
+        self.altura = altura
+        self.texto = texto
+
+        def desenhar(self):
+        linha_superior = "╔" + "═" * (self.largura - 2) + "╗"
+        linhas_meio = "║" + self.texto.center(self.largura - 2) + "║"
+        linha_inferior = "╚" + "═" * (self.largura - 2) + "╝"
+        retangulo = [linha_superior]
+        retangulo.extend([linhas_meio] * (self.altura - 2))
+        retangulo.append(linha_inferior)
+        return "\n".join(retangulo)
+        {
+}
