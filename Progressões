@@ -1,42 +1,80 @@
-public class trabalho class Progressao:
-        def __init__(self, primeiro=0, razao=1):
-        self.primeiro = primeiro
-        self.razao = razao
-        self.proximo_numero = primeiro
 
-        def proximo(self):
-        self.proximo_numero += self.razao
-        return self.proximo_numero
+public abstract class Progressao {
+    protected int atual;
 
-        def reiniciar(self):
-        self.proximo_numero = self.primeiro
+    public Progressao(int inicio) {
+        this.atual = inicio;
+    }
 
+    public abstract int proximo();
 
-class ProgressaoAritmetica(Progressao):
-        def __init__(self, primeiro=0, razao=1):
-        super().__init__(primeiro, razao)
+    public void reiniciar() {
+        atual = primeiro();
+    }
 
-
-class ProgressaoGeometrica(Progressao):
-        def __init__(self, primeiro=1, razao=2):
-        super().__init__(primeiro, razao)
-
-        def proximo(self):
-        self.proximo_numero *= self.razao
-        return self.proximo_numero
+    protected abstract int primeiro();
+}
 
 
-class ProgressaoFibonacci(Progressao):
-        def __init__(self, primeiro=0, segundo=1):
-        self.primeiro = primeiro
-        self.segundo = segundo
-        self.proximo_numero = primeiro
+public class ProgressaoAritmetica extends Progressao {
+    private int razao;
 
-        def proximo(self):
-        proximo_numero = self.primeiro + self.segundo
-        self.primeiro = self.segundo
-        self.segundo = proximo_numero
-        self.proximo_numero = proximo_numero
-        return proximo_numero
-        {
+    public ProgressaoAritmetica(int inicio, int razao) {
+        super(inicio);
+        this.razao = razao;
+    }
+
+    public int proximo() {
+        int proximo = atual;
+        atual += razao;
+        return proximo;
+    }
+
+    protected int primeiro() {
+        return 0;
+    }
+}
+
+
+public class ProgressaoGeometrica extends Progressao {
+    private int razao;
+
+    public ProgressaoGeometrica(int inicio, int razao) {
+        super(inicio);
+        this.razao = razao;
+    }
+
+    public int proximo() {
+        int proximo = atual;
+        atual *= razao;
+        return proximo;
+    }
+
+    protected int primeiro() {
+        return 1;
+    }
+}
+
+
+public class ProgressaoFibonacci extends Progressao {
+    private int anterior;
+    private int penultimo;
+
+    public ProgressaoFibonacci() {
+        super(0);
+        anterior = 0;
+        penultimo = 1;
+    }
+
+    public int proximo() {
+        int proximo = anterior + penultimo;
+        penultimo = anterior;
+        anterior = proximo;
+        atual = proximo;
+        return proximo;
+    }
+
+    protected int primeiro() {
+        return 0;
+    }
 }
