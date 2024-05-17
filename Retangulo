@@ -1,56 +1,83 @@
-public class main class RetanguloDecorator:
-        def __init__(self, retangulo):
-        self.retangulo = retangulo
 
-        def desenhar(self):
-        return self.retangulo.desenhar()
-
-
-class RetanguloSimples:
-        def __init__(self, largura, altura, texto):
-        self.largura = largura
-        self.altura = altura
-        self.texto = texto
-
-        def desenhar(self):
-        linha_superior = "+" + "-" * (self.largura - 2) + "+"
-        linhas_meio = "|" + self.texto.center(self.largura - 2) + "|"
-        linha_inferior = "+" + "-" * (self.largura - 2) + "+"
-        retangulo = [linha_superior]
-        retangulo.extend([linhas_meio] * (self.altura - 2))
-        retangulo.append(linha_inferior)
-        return "\n".join(retangulo)
-
-
-class RetanguloComBordasArredondadas:
-        def __init__(self, largura, altura, texto):
-        self.largura = largura
-        self.altura = altura
-        self.texto = texto
-
-        def desenhar(self):
-        linha_superior = "╭" + "─" * (self.largura - 2) + "╮"
-        linhas_meio = "│" + self.texto.center(self.largura - 2) + "│"
-        linha_inferior = "╰" + "─" * (self.largura - 2) + "╯"
-        retangulo = [linha_superior]
-        retangulo.extend([linhas_meio] * (self.altura - 2))
-        retangulo.append(linha_inferior)
-        return "\n".join(retangulo)
-
-
-class RetanguloComLinhasDuplas:
-        def __init__(self, largura, altura, texto):
-        self.largura = largura
-        self.altura = altura
-        self.texto = texto
-
-        def desenhar(self):
-        linha_superior = "╔" + "═" * (self.largura - 2) + "╗"
-        linhas_meio = "║" + self.texto.center(self.largura - 2) + "║"
-        linha_inferior = "╚" + "═" * (self.largura - 2) + "╝"
-        retangulo = [linha_superior]
-        retangulo.extend([linhas_meio] * (self.altura - 2))
-        retangulo.append(linha_inferior)
-        return "\n".join(retangulo)
-        {
+public interface Retangulo {
+    String desenhar();
 }
+
+
+public class RetanguloSimples implements Retangulo {
+    private int largura;
+    private int altura;
+    private String texto;
+
+    public RetanguloSimples(int largura, int altura, String texto) {
+        this.largura = largura;
+        this.altura = altura;
+        this.texto = texto;
+    }
+
+    public String desenhar() {
+        StringBuilder retangulo = new StringBuilder();
+        String linhaSuperior = "+" + "-".repeat(this.largura - 2) + "+";
+        String linhasMeio = "|" + this.texto + "|";
+        String linhaInferior = linhaSuperior;
+        retangulo.append(linhaSuperior).append("\n");
+        for (int i = 0; i < this.altura - 2; i++) {
+            retangulo.append(linhasMeio).append("\n");
+        }
+        retangulo.append(linhaInferior);
+        return retangulo.toString();
+    }
+}
+
+
+public class RetanguloComBordasArredondadas implements Retangulo {
+    private int largura;
+    private int altura;
+    private String texto;
+
+    public RetanguloComBordasArredondadas(int largura, int altura, String texto) {
+        this.largura = largura;
+        this.altura = altura;
+        this.texto = texto;
+    }
+
+    public String desenhar() {
+        StringBuilder retangulo = new StringBuilder();
+        String linhaSuperior = "╭" + "─".repeat(this.largura - 2) + "╮";
+        String linhasMeio = "│" + this.texto + "│";
+        String linhaInferior = "╰" + "─".repeat(this.largura - 2) + "╯";
+        retangulo.append(linhaSuperior).append("\n");
+        for (int i = 0; i < this.altura - 2; i++) {
+            retangulo.append(linhasMeio).append("\n");
+        }
+        retangulo.append(linhaInferior);
+        return retangulo.toString();
+    }
+}
+
+
+public class RetanguloComLinhasDuplas implements Retangulo {
+    private int largura;
+    private int altura;
+    private String texto;
+
+    public RetanguloComLinhasDuplas(int largura, int altura, String texto) {
+        this.largura = largura;
+        this.altura = altura;
+        this.texto = texto;
+    }
+
+    public String desenhar() {
+        StringBuilder retangulo = new StringBuilder();
+        String linhaSuperior = "╔" + "═".repeat(this.largura - 2) + "╗";
+        String linhasMeio = "║" + this.texto + "║";
+        String linhaInferior = "╚" + "═".repeat(this.largura - 2) + "╝";
+        retangulo.append(linhaSuperior).append("\n");
+        for (int i = 0; i < this.altura - 2; i++) {
+            retangulo.append(linhasMeio).append("\n");
+        }
+        retangulo.append(linhaInferior);
+        return retangulo.toString();
+    }
+}
+
